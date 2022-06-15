@@ -1,5 +1,5 @@
 const Server = require('./src/server')
-const config = require('./src/config')
+const config = require('./config')
 
 function runServer() {
     process.on('uncaughtException', (err) => {

@@ -1,10 +1,12 @@
 const express = require('express')
-require('dotenv').config({ path: './config.env' })
+const path = require('path')
+require('dotenv').config({path: './config.env'})
 
 const DbManager = require('./db/database-manager')
 const Logger = require('./lib/logger')
 const API = require('./api')
 const initJobs = require('./scheduler')
+const {isProduction} = require('./utils')
 
 class Server {
     app
@@ -20,7 +22,18 @@ class Server {
         this.logger = new Logger()
         this.dbManager = new DbManager(config.DATABASE)
         this.port = config.SERVER.PORT
+
+        if (isProduction()) {
+            app.use(express.static(path.join(__dirname, '/client/build')))
+
+            app.get('*', (req, res) => {
+                res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+            })
+        }
+
         app.use('/api', this.api.getAPI())
+
+
     }
 
     listen() {

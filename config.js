@@ -5,7 +5,10 @@ const CONFIG = {
         DB_NAME: process.env.DB_NAME || 'todo-app'
     },
     SERVER: {
-        PORT: process.env.SERVER_PORT || 3000
+        PORT: process.env.SERVER_PORT || 5000
+    },
+    NODE_ENV: {
+        PORT: process.env.NODE_ENV || 'local'
     }
 }
 
