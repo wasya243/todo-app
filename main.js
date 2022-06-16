@@ -11,6 +11,7 @@ function runServer() {
     })
 
     const server = new Server(config)
+
     server
         .run()
         .catch(e => console.error('error while starting server', e));

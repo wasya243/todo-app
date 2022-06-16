@@ -7,9 +7,7 @@ const CONFIG = {
     SERVER: {
         PORT: process.env.SERVER_PORT || 5000
     },
-    NODE_ENV: {
-        PORT: process.env.NODE_ENV || 'local'
-    }
+    NODE_ENV: process.env.NODE_ENV || 'local'
 }
 
 module.exports = CONFIG

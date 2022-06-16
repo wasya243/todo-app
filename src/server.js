@@ -22,18 +22,6 @@ class Server {
         this.logger = new Logger()
         this.dbManager = new DbManager(config.DATABASE)
         this.port = config.SERVER.PORT
-
-        if (isProduction()) {
-            app.use(express.static(path.join(__dirname, '/client/build')))
-
-            app.get('*', (req, res) => {
-                res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
-            })
-        }
-
-        app.use('/api', this.api.getAPI())
-
-
     }
 
     listen() {
@@ -43,10 +31,23 @@ class Server {
     }
 
     async run() {
+        this.logger.setup()
         await this.dbManager.connect()
         initJobs()
-        this.logger.setup()
         this.listen()
+        this._setUpRoutes()
+    }
+
+    _setUpRoutes() {
+        this.app.use('/api', this.api.getAPI())
+
+        if (isProduction()) {
+            this.app.use(express.static(path.join(__dirname, '/client/build')))
+
+            this.app.get('*', (req, res) => {
+                res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+            })
+        }
     }
 }
 
