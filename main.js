@@ -1,4 +1,4 @@
-const Server = require('./src/server')
+const Server = require('./server')
 const config = require('./config')
 
 function runServer() {
