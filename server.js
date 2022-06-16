@@ -21,7 +21,7 @@ class Server {
         this.app = app
         this.logger = new Logger()
         this.dbManager = new DbManager(config.MONGO_URI)
-        this.port = config.
+        this.port = config.SERVER.PORT
     }
 
     listen() {
