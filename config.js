@@ -1,9 +1,5 @@
 const CONFIG = {
-    DATABASE: {
-        PORT: process.env.DB_PORT || 27017,
-        HOST: process.env.DB_HOST || 'localhost',
-        DB_NAME: process.env.DB_NAME || 'todo-app'
-    },
+    MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost:27017/test-db',
     SERVER: {
         PORT: process.env.SERVER_PORT || 5000
     },

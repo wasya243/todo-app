@@ -1,31 +1,21 @@
 const mongoose = require('mongoose')
 
 class DatabaseManager {
-    db
-    port
-    host
-    dbName
+    uri
 
-    constructor(dbConfig = {}) {
+    constructor(uri) {
         mongoose.Promise = global.Promise
-        this.port = dbConfig.PORT
-        this.dbName = dbConfig.DB_NAME
-        this.host = dbConfig.HOST
-    }
-
-    _getConnectionUrl() {
-        return `mongodb://${this.host}:${this.port}/${this.dbName}`
+        this.uri = uri
     }
 
     async connect() {
-        const url = this._getConnectionUrl()
         try {
-            this.db = await mongoose.connect(url, {useNewUrlParser: true})
-            console.log(`Database connection is established. MONGO URL is ${url}`)
+            this.db = await mongoose.connect(this.uri, {useNewUrlParser: true})
+            console.log(`Database connection is established. MONGO URL is ${this.uri}`)
 
             return this.db
         } catch (err) {
-            console.error(`Failed to establish database connection. MONGO URL ${url}`)
+            console.error(`Failed to establish database connection. MONGO URL ${this.uri}`)
 
             throw err;
         }
