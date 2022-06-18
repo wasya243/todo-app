@@ -1,24 +1,34 @@
 import React from 'react'
 
 import RemoveButton from '../RemoveButton'
+import './index.css'
+
+const TodoItem = ({todo = {}, onDelete, ...props}) => {
+    return (
+        <div key={todo._id} {...props} className="todo-item">
+            <span>{todo.text}</span>
+            <RemoveButton onClick={() => onDelete(todo._id)}/>
+        </div>
+    )
+}
 
 const TodoList = ({
-    todoList = [],
-    onDelete
-}) => {
+                      todoList = [],
+                      onDelete
+                  }) => {
     return (
-        <>
+        <div className="todo-list">
             {
                 todoList.map(todo => {
                     return (
-                        <div key={todo._id}>
-                            <span>{todo.text}</span>
-                            <RemoveButton onClick={() => onDelete(todo._id)} />
-                        </div>
+                        <TodoItem
+                            todo={todo}
+                            onDelete={onDelete}
+                        />
                     )
                 })
             }
-        </>
+        </div>
     )
 }
 

@@ -87,16 +87,20 @@ function App() {
     }, [user])
 
     return (
-        <div>
-            <Search
-                onChange={handleTodoTextChange}
-                placeholder="type todo"
-                value={todoText}
-            />
-            <AddButton
-                onAdd={addTodo}
-                disabled={!todoText}
-            />
+        <div className="container">
+            <div className="search-container">
+                <Search
+                    onChange={handleTodoTextChange}
+                    placeholder="type todo"
+                    value={todoText}
+                />
+
+                <AddButton
+                    onAdd={addTodo}
+                    disabled={!todoText}
+                />
+            </div>
+
             <TodoList
                 todoList={todoList}
                 onDelete={removeTodo}

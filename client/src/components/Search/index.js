@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './index.css'
+
 const Search = ({
     onChange,
     value,
@@ -8,6 +10,7 @@ const Search = ({
 }) => {
     return (
         <input
+            className="search"
             placeholder={placeholder}
             value={value}
             onChange={(ev) => onChange(ev.target.value)}
