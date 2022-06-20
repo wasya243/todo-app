@@ -1,7 +1,7 @@
 import React from 'react'
 
 import RemoveButton from '../RemoveButton'
-import './index.css'
+import './index.scss'
 
 const TodoItem = ({todo = {}, onDelete, ...props}) => {
     return (
