@@ -61,6 +61,23 @@ function App() {
         }
     }
 
+    const handleComplete = async (id, is_completed) => {
+        try {
+            await fetch(`/api/todos/${id}`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    is_completed
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            fetchTodoList()
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     const removeTodo = async (id) => {
         try {
             await fetch(`/api/todos/${id}`, {
@@ -103,6 +120,7 @@ function App() {
 
             <TodoList
                 todoList={todoList}
+                onComplete={handleComplete}
                 onDelete={removeTodo}
             />
         </div>

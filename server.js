@@ -42,8 +42,6 @@ class Server {
         this.app.use('/api', this.api.getAPI())
 
         if (isProduction()) {
-            const a = path.join(__dirname, '/client/build')
-            console.log('aa', a)
             this.app.use(express.static(path.join(__dirname, '/client/build')))
 
             this.app.get('*', (req, res) => {

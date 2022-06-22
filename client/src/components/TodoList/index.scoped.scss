@@ -3,6 +3,13 @@
     overflow-y: auto;
     border: 1px solid grey;
 
+    .todo-item.completed {
+        background: lightblue;
+        span {
+            text-decoration: line-through;
+        }
+    }
+
     .todo-item {
         display: flex;
         justify-content: space-between;

@@ -17,6 +17,7 @@ class Todo {
     }
 
     setupRoutes() {
+        this.router.patch('/todos/:id', this.todoHandler.patchTodo)
         this.router.get('/todos/:id', this.todoHandler.getTodos)
         this.router.post('/todos', this.todoHandler.createTodo)
         this.router.delete('/todos/:id', this.todoHandler.deleteTodo)

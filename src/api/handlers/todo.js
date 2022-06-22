@@ -5,6 +5,7 @@ class TodoHandler {
         this.createTodo = this.createTodo.bind(this)
         this.deleteTodo = this.deleteTodo.bind(this)
         this.getTodos = this.getTodos.bind(this)
+        this.patchTodo = this.patchTodo.bind(this)
     }
 
     async createTodo(req, res, next) {
@@ -31,6 +32,19 @@ class TodoHandler {
             await Todo.deleteOne({_id: id})
 
             res.send('deleted')
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    async patchTodo(req, res, next) {
+        try {
+            const id = req.params.id
+            const {is_completed} = req.body
+
+            await Todo.updateOne({_id: id}, {is_completed})
+
+            res.send('updated')
         } catch (err) {
             next(err)
         }

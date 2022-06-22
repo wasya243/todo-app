@@ -10,6 +10,10 @@ const todoSchema = new mongoose.Schema({
         type: mongooseTypes.String,
         required: true
     },
+    is_completed: {
+        type: mongooseTypes.Boolean,
+        default: false
+    },
     createdAt: {
         type: mongooseTypes.Date,
         default: Date.now()
