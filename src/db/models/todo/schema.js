@@ -14,6 +14,10 @@ const todoSchema = new mongoose.Schema({
         type: mongooseTypes.Boolean,
         default: false
     },
+    due_date: {
+        type: mongooseTypes.Date,
+        required: true
+    },
     createdAt: {
         type: mongooseTypes.Date,
         default: Date.now()

@@ -6,6 +6,8 @@ import './App.scss'
 import Search from './components/Search'
 import TodoList from './components/TodoList'
 import AddButton from './components/AddButton'
+import DateSelector from './components/DateSelector'
+import * as moment from 'moment'
 
 const USER_KEY = 'user'
 
@@ -14,6 +16,7 @@ function App() {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState({})
     const [todoText, setTodoText] = useState('')
+    const [dueDate, setDueDate] = useState('')
 
     const fetchTodoList = async () => {
         try {
@@ -47,7 +50,8 @@ function App() {
                 method: 'POST',
                 body: JSON.stringify({
                     text: todoText,
-                    user_id: user.user_id
+                    user_id: user.user_id,
+                    due_date: dueDate
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,6 +59,7 @@ function App() {
             })
 
             setTodoText('')
+            setDueDate('')
             fetchTodoList()
         } catch (err) {
             console.error(err)
@@ -93,6 +98,10 @@ function App() {
         setTodoText(text)
     }
 
+    const handleDueDateChange = (dueDate) => {
+        setDueDate(dueDate)
+    }
+
     useEffect(() => {
         initUser()
     }, [])
@@ -112,9 +121,15 @@ function App() {
                     value={todoText}
                 />
 
+                <DateSelector
+                    value={dueDate}
+                    minValue={moment().format('yyyy-MM-DD')}
+                    onChange={handleDueDateChange}
+                />
+
                 <AddButton
                     onAdd={addTodo}
-                    disabled={!todoText}
+                    disabled={!todoText || !dueDate}
                 />
             </div>
 

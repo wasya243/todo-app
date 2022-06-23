@@ -10,11 +10,12 @@ class TodoHandler {
 
     async createTodo(req, res, next) {
         try {
-            const {text, user_id} = req.body
+            const {text, user_id, due_date} = req.body
 
             const todoDoc = new Todo({
                 text,
-                user_id
+                user_id,
+                due_date
             })
 
             await todoDoc.save()
